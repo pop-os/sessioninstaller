@@ -1,0 +1,358 @@
+# German translation of sessioninstaller
+# Copyright (C) 2010 Sebastian Heinlein <devel@glatzor.de>
+# This file is distributed under the same license as the sessioninstaller
+# package.
+# Sebastian Heinlein <devel@glatzor.de>, 2010
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: sessioninstaller VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-01 16:30+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Sebastian Heinlein <devel@glatzor.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: ../test.py:40
+msgid "Install the given packages"
+msgstr "Angebene Pakete installieren"
+
+#: ../test.py:43
+msgid "Install package files"
+msgstr "Packet-Dateien installieren"
+
+#: ../test.py:46
+msgid "Remove the packages which provide the given files"
+msgstr "Packete mit den angegebenen Dateien entfernen"
+
+#: ../test.py:50
+msgid "Check if a package is installed"
+msgstr ""
+
+#: ../test.py:53
+msgid "Search for the package providing the given file"
+msgstr ""
+
+#: ../test.py:57
+#, python-format
+msgid ""
+"Specify the interaction mode by providing a comma spearated list of the "
+"following values: %s. This is currently not supported."
+msgstr ""
+
+#: ../test.py:65
+msgid "Install the packages specfied in the given PackageKit catalog"
+msgstr ""
+
+#: ../test.py:69
+msgid ""
+"Install the given GStreamer resource. The value 'lazy' can be used as an "
+"alias for WMV9."
+msgstr ""
+
+#: ../test.py:73
+msgid ""
+"Wait for the given seconds until the action is done. Defaults to 5 Minutes."
+msgstr ""
+
+#: ../test.py:82
+#, python-format
+msgid "Removing files: %s"
+msgstr ""
+
+#: ../test.py:88
+#, python-format
+msgid "Checking if %s is installed"
+msgstr ""
+
+#: ../test.py:92
+#, python-format
+msgid "Searching for %s"
+msgstr ""
+
+#: ../test.py:96
+#, python-format
+msgid "Installing from catalog: %s"
+msgstr ""
+
+#: ../test.py:101
+#, python-format
+msgid "Installing files: %s"
+msgstr ""
+
+#: ../test.py:107
+#, python-format
+msgid "Installing packages: %s"
+msgstr ""
+
+#: ../test.py:115
+#, python-format
+msgid "Installing GStreamer-Resource: %s"
+msgstr ""
+
+#: ../sessioninstaller/core.py:199
+msgid "I_nstall"
+msgstr ""
+
+#: ../sessioninstaller/core.py:238
+msgid "Package"
+msgstr ""
+
+#: ../sessioninstaller/core.py:271
+msgid ""
+"The use of this software may be restricted in some countries. You must "
+"verify that one of the following is true:\n"
+"• These restrictions do not apply in your country of legal residence\n"
+"• You have permission to use this software (for example, a patent license)\n"
+"• You are using this software for research purposes only"
+msgstr ""
+
+#: ../sessioninstaller/core.py:503
+msgid "Failed to install multiple package files"
+msgstr ""
+
+#. FIXME: should provide some information about how to get fonts
+#: ../sessioninstaller/core.py:505
+msgid ""
+"Installing more than one package file at the same time isn't supported. "
+"Please install one after the other."
+msgstr ""
+
+#: ../sessioninstaller/core.py:509
+msgid "Relative path to package file"
+msgstr ""
+
+#: ../sessioninstaller/core.py:510
+msgid "You have to specify the absolute path to the package file."
+msgstr ""
+
+#: ../sessioninstaller/core.py:513
+msgid "Unsupported package format"
+msgstr ""
+
+#: ../sessioninstaller/core.py:514
+msgid "Only Debian packages are supported (*.deb)"
+msgstr ""
+
+#: ../sessioninstaller/core.py:540
+msgid "Installing packages by files isn't supported"
+msgstr ""
+
+#: ../sessioninstaller/core.py:541
+msgid "This method hasn't yet been implemented."
+msgstr ""
+
+#: ../sessioninstaller/core.py:578 ../sessioninstaller/core.py:588
+#: ../sessioninstaller/core.py:595
+msgid "Catalog could not be read"
+msgstr ""
+
+#. TRANSLATORS: %s is a file path
+#: ../sessioninstaller/core.py:580
+#, python-format
+msgid "The catalog file '%s' doesn't exist."
+msgstr ""
+
+#. TRANSLATORS: %s is a file path
+#: ../sessioninstaller/core.py:590
+#, python-format
+msgid "The catalog file '%s' could not be opened and and read."
+msgstr ""
+
+#. TRANSLATORS: %s is a file path
+#: ../sessioninstaller/core.py:597
+#, python-format
+msgid ""
+"The file '%s' isn't a valid software catalog. Please redownload or contanct "
+"the provider."
+msgstr ""
+
+#: ../sessioninstaller/core.py:606
+msgid "Catalog is not supported"
+msgstr ""
+
+#: ../sessioninstaller/core.py:607
+#, python-format
+msgid ""
+"The method '%s' which is used to specify packages isn't supported.\n"
+"Please contact the provider of the catalog about this issue."
+msgstr ""
+
+#: ../sessioninstaller/core.py:627
+msgid "A required package is not installable"
+msgid_plural "Required packages are not installable"
+msgstr[0] ""
+msgstr[1] ""
+
+#. TRANSLATORS: %s is the name of the missing packages
+#: ../sessioninstaller/core.py:632
+#, python-format
+msgid ""
+"The catalog requires the installation of the package %s which is not "
+"available."
+msgid_plural ""
+"The catalog requires the installation of the following packages which are "
+"not available: %s"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Create nice messages
+#: ../sessioninstaller/core.py:645
+msgid "Install the following software package?"
+msgid_plural "Install the following software packages?"
+msgstr[0] ""
+msgstr[1] ""
+
+#. TRANSLATORS: %s is the name of the application which requested
+#. the installation
+#: ../sessioninstaller/core.py:651
+#, python-format
+msgid "%s requires the installation of an additional software package."
+msgid_plural "%s requires the installation of additional software packages."
+msgstr[0] ""
+msgstr[1] ""
+
+#. TRANSLATORS: %s is an absolute file path, e.g. /usr/bin/xterm
+#: ../sessioninstaller/core.py:658
+#, python-format
+msgid "The package catalog %s requests to install the following software."
+msgid_plural "The following catalogs request to install software: %s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sessioninstaller/core.py:713
+msgid "Searching for file type handler isn't supported"
+msgstr ""
+
+#: ../sessioninstaller/core.py:714
+msgid ""
+"Currently searching and installation of application which can handle special "
+"files isn't supported."
+msgstr ""
+
+#: ../sessioninstaller/core.py:743
+msgid "Installing printer drivers on request isn't supported"
+msgstr ""
+
+#: ../sessioninstaller/core.py:744
+msgid ""
+"Currently autodetection and installation of missing printer drivers is not "
+"supported."
+msgstr ""
+
+#: ../sessioninstaller/core.py:771
+msgid "Installing fonts on request isn't supported"
+msgstr ""
+
+#: ../sessioninstaller/core.py:772
+msgid ""
+"Currently autodetection and installation of missing fonts is not supported."
+msgstr ""
+
+#: ../sessioninstaller/core.py:808
+msgid "Invalid search term"
+msgstr ""
+
+#: ../sessioninstaller/core.py:809
+#, python-format
+msgid "The following term doesn't describe a GStreamer resource: %s"
+msgstr ""
+
+#. TRANSLATORS: %s is the application requesting the plugins
+#: ../sessioninstaller/core.py:839
+#, python-format
+msgid "%s requires extra plugins to handle the following media content type:"
+msgid_plural ""
+"%s requires extra plugins to handle following media content types:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sessioninstaller/core.py:845
+msgid "Extra plugins to handle the following media content type are required:"
+msgid_plural ""
+"Extra plugins to handle following media content types are required:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. FIXME: Add more info and possible solutions for the user
+#: ../sessioninstaller/core.py:909
+msgid "Required plugin could not be found"
+msgstr ""
+
+#. Show a confirmation dialog
+#: ../sessioninstaller/core.py:915
+msgid "Install extra multimedia plugin?"
+msgid_plural "Install extra multimedia plugins?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sessioninstaller/core.py:958
+msgid "Files are not installed"
+msgstr ""
+
+#: ../sessioninstaller/core.py:959
+msgid ""
+"The files which should be removed are not part of any installed software."
+msgstr ""
+
+#: ../sessioninstaller/backends/dummy.py:39
+msgid "Removing packages"
+msgstr ""
+
+#: ../sessioninstaller/backends/dummy.py:40
+#, python-format
+msgid "The following packages will be removed with interaction mode %s: %s"
+msgstr ""
+
+#: ../sessioninstaller/backends/dummy.py:45
+msgid "Installing packages"
+msgstr ""
+
+#: ../sessioninstaller/backends/dummy.py:46
+#, python-format
+msgid "The following packages will be installed with interaction mode %s: %s"
+msgstr ""
+
+#: ../sessioninstaller/backends/dummy.py:51
+msgid "Installing package files"
+msgstr ""
+
+#: ../sessioninstaller/backends/dummy.py:52
+#, python-format
+msgid ""
+"The following package files will be installed with interaction mode %s: %s"
+msgstr ""
+
+#: ../sessioninstaller/gstinstaller.py:45
+msgid "Initializing GStreamerInstaller"
+msgstr ""
+
+#: ../sessioninstaller/gstinstaller.py:66
+#, python-format
+msgid "Ignoring codec: %s"
+msgstr ""
+
+#: ../sessioninstaller/gstinstaller.py:76
+#, python-format
+msgid "Add provide: %s"
+msgstr ""
+
+#: ../sessioninstaller/gstinstaller.py:91
+msgid "The X Window ID of the calling application"
+msgstr ""
+
+#: ../sessioninstaller/gstinstaller.py:100
+msgid "Cancelled"
+msgstr ""
+
+#: ../sessioninstaller/gstinstaller.py:103
+msgid "Could not find any packages to operate on"
+msgstr ""
+
+#: ../sessioninstaller/gstinstaller.py:108
+msgid "Finsihed succesfully"
+msgstr ""

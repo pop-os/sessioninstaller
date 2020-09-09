@@ -1,0 +1,15 @@
+#!/bin/sh
+# prerm script for sessioninstaller
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "deconfigure" ] ; then
+	update-alternatives --remove gstreamer-codec-install \
+			    /usr/bin/gst-installer || true
+
+fi
+
+#DEBHELPER#
+
+exit 0
+

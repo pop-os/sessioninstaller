@@ -1,0 +1,49 @@
+Source: sessioninstaller
+Section: gnome
+Priority: extra
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Julian Andres Klode <jak@debian.org>
+Build-Depends: debhelper (>= 7.3),
+               dh-python,
+               python3,
+               python3-setuptools,
+               python3-distutils-extra
+Standards-Version: 3.9.2
+X-Python3-Version: >= 3.2
+Homepage: http://launchpad.net/sessioninstaller
+Vcs-Bzr: lp:~aptdaemon-developers/sessioninstaller/ubuntu-wily
+Vcs-Browser: http://bazaar.launchpad.net/~aptdaemon-developers/sessioninstaller/ubuntu-wily
+
+Package: sessioninstaller
+Architecture: all
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         ${python3:Depends},
+         aptdaemon (>=0.30),
+         app-install-data,
+         python3-aptdaemon.gtk3widgets,
+         python3-commandnotfound,
+         python3-defer,
+         python3-gi,
+         python3-xdg,
+         gir1.2-gtk-3.0,
+         gir1.2-gstreamer-1.0
+Conflicts: packagekit-gnome, gnome-codec-install
+Replaces: gnome-codec-install
+Provides: gnome-codec-install
+Description: APT based installer using PackageKit's session DBus API
+ Sessioninstaller allows applications to easily install additional software 
+ (e.g. extensions or GStreamer codecs), uninstall files and perform simple
+ software status queries by implementing the distribution neutral
+ D-Bus session interface of PackageKit.
+ .
+ The whole process including confirmation, error reporting and progress
+ and notification is handled by sessioninstaller.
+ .
+ The reference implementation of the D-Bus interface can be found in 
+ gnome-packagekit. It was also adopted by KPackageKit.
+ .
+ In contrast to gnome-packagekit and KPackageKit it doesn't use the PackageKit
+ daemon for querying and installation, but instead makes use of APT and 
+ aptdaemon (alternatively synaptic can be used).
+

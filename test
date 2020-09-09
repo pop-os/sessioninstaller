@@ -1,0 +1,154 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Test client for sessioninstaller"""
+# Copyright (C) 2008-2010 Sebastian Heinlein <devel@glatzor.de>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+__author__  = "Sebastian Heinlein <devel@glatzor.de>"
+__state__   = "experimental"
+
+import os
+from optparse import OptionParser
+from gettext import gettext as _
+
+import dbus
+import dbus.mainloop.glib
+dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+
+from sessioninstaller.core import PACKAGEKIT_QUERY_DBUS_INTERFACE, \
+                                  PACKAGEKIT_MODIFY_DBUS_INTERFACE, \
+                                  PACKAGEKIT_DBUS_PATH, \
+                                  PACKAGEKIT_DBUS_SERVICE
+
+def main():
+    parser = OptionParser()
+    parser.add_option("", "--install-packages",
+                      action="store", type="string", dest="install_packages",
+                      help=_("Install the given packages"))
+    parser.add_option("", "--install-files",
+                      action="store", type="string", dest="install_files",
+                      help=_("Install package files"))
+    parser.add_option("", "--install-provide-files",
+                      action="store", type="string", dest="install_provide",
+                      help=_("Install packages which provide the given files"))
+    parser.add_option("", "--remove-files",
+                      action="store", type="string", dest="remove_files",
+                      help=_("Remove the packages which provide the given "
+                             "files"))
+    parser.add_option("", "--is-installed",
+                      action="store", type="string", dest="is_installed",
+                      help=_("Check if a package is installed"))
+    parser.add_option("", "--search-file",
+                      action="store", type="string", dest="search_file",
+                      help=_("Search for the package providing the given file"))
+    parser.add_option("-i", "--interaction",
+                      action="store", type="string", dest="interaction",
+                      default="always",
+                      help=_("Specify the interaction mode by providing a "
+                             "comma spearated list of the following values: "
+                             "%s. This is currently not supported.") %
+                           ("show-confirm-search show-confirm-deps "
+                            "show-confirm-install show-progress "
+                            "show-finished show-warning"))
+    parser.add_option("", "--install-catalog",
+                      action="store", type="string", dest="install_catalog",
+                      help=_("Install the packages specfied in the given "
+                             "PackageKit catalog"))
+    parser.add_option("", "--install-mime-types",
+                      action="store", type="string", dest="install_mime_types",
+                      help=_("Install mime type handlers"))
+    parser.add_option("", "--install-gstreamer",
+                      action="store", type="string", dest="install_gstreamer",
+                      help=_("Install the given GStreamer resource. The value "
+                             "'single' can be used as an alias for WMV9 and "
+                             "the value 'multi' as an alias for a group of "
+                             "codecs."))
+    parser.add_option("-t", "--timeout", action="store", type="int",
+                      default=300,
+                      help=_("Wait for the given seconds until the "
+                             "action is done. Defaults to 5 Minutes."))
+    options, args = parser.parse_args()
+
+    xid = int(os.getenv("WINDOWID", "0"))
+    bus = dbus.SessionBus()
+    pk = bus.get_object(PACKAGEKIT_DBUS_SERVICE, PACKAGEKIT_DBUS_PATH, False)
+
+    if options.remove_files:
+        print(_("Removing files: %s") % options.remove_files)
+        pk.RemovePackageByFiles(xid, options.remove_files.split(),
+                                options.interaction,
+                                timeout=options.timeout,
+                                dbus_interface=PACKAGEKIT_MODIFY_DBUS_INTERFACE)
+    elif options.is_installed:
+        print(_("Checking if %s is installed") % options.is_installed)
+        print(bool(pk.IsInstalled(options.is_installed, options.interaction,
+                                dbus_interface=PACKAGEKIT_QUERY_DBUS_INTERFACE)))
+    elif options.search_file:
+        print(_("Searching for %s") % options.search_file)
+        print(pk.SearchFile(options.search_file, options.interaction,
+                            dbus_interface=PACKAGEKIT_QUERY_DBUS_INTERFACE))
+    elif options.install_catalog:
+        print(_("Installing from catalog: %s") % options.install_catalog)
+        pk.InstallCatalogs(xid, [options.install_catalog], options.interaction,
+                           timeout=options.timeout,
+                           dbus_interface=PACKAGEKIT_MODIFY_DBUS_INTERFACE)
+    elif options.install_files:
+        print(_("Installing files: %s") % options.install_files)
+        pk.InstallPackageFiles(xid, options.install_files.split(),
+                               options.interaction,
+                               timeout=options.timeout,
+                               dbus_interface=PACKAGEKIT_MODIFY_DBUS_INTERFACE)
+    elif options.install_packages:
+        print(_("Installing packages: %s") % options.install_packages)
+        pk.InstallPackageNames(xid, options.install_packages.split(),
+                               options.interaction,
+                               timeout=options.timeout,
+                               dbus_interface=PACKAGEKIT_MODIFY_DBUS_INTERFACE)
+    elif options.install_mime_types:
+        print(_("Installing mimetype handlers: %s") % options.install_mime_types)
+        pk.InstallMimeTypes(xid, options.install_mime_types.split(),
+                            options.interaction,
+                            timeout=options.timeout,
+                            dbus_interface=PACKAGEKIT_MODIFY_DBUS_INTERFACE)
+    elif options.install_provide:
+        print(_("Installing providers: %s") % options.install_provide)
+        pk.InstallProvideFiles(xid, options.install_provide.split(),
+                               options.interaction,
+                               timeout=options.timeout,
+                               dbus_interface=PACKAGEKIT_MODIFY_DBUS_INTERFACE)
+    elif options.install_gstreamer:
+        if options.install_gstreamer == "single":
+            resources = ["Windows Media Video 9|gstreamer0.10"
+                         "(decoder-video/x-wmv)"]
+        elif options.install_gstreamer == "multi":
+            resources = ["Windows Media Video 9|gstreamer0.10"
+                         "(decoder-video/x-wmv)",
+                         "H.264-Decoder|gstreamer0.10(decoder-video/x-h264)"
+                         "(profile=(string)baseline)(level=(string)1.1)",
+                         "MPeg 3|gstreamer0.10(decoder-audio/mpeg)"
+                         "(mpegversion=(int)1)(layer=(int)[ 1, 3 ])"]
+        else:
+            resources = [options.install_gstreamer]
+
+        print(_("Installing GStreamer-Resource: %s") % resources)
+        pk.InstallGStreamerResources(xid, resources, options.interaction,
+                                timeout=options.timeout,
+                                dbus_interface=PACKAGEKIT_MODIFY_DBUS_INTERFACE)
+
+if __name__ == "__main__":
+    main()
+
+# vim:ts=4:sw=4:et

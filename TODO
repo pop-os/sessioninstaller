@@ -1,0 +1,8 @@
+NORMAL
+ 
+ * ConfimInstallDialog: Allow to select between packages if the same codec
+   is provided by more than one package
+
+ * Add support for searching for mime type handlers (Keep an eye on
+   software-center)
+

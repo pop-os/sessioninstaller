@@ -1,0 +1,5 @@
+To start the daemon from source run:
+
+python sessioninstaller/core.py.
+
+The test.py provides you a quick way to call the daemon via D-Bus.

@@ -1,0 +1,33 @@
+VERSION 0.20
+
+This release introduces the following features and changes:
+
+ * Confirmation dialogs for installing (by name and file) and removing packages
+
+ * Use the exe of the calling process instead of the parent's window title
+   to identify the programme which has tiggered the action.
+   Use the application name of an exectuable if a corresponding .desktop file
+   is installed.
+   Furthermore support python and perl scripts.
+
+ * Support installing mime type handler (requires app-install-data to be
+   installed)
+
+ * Improved GStreamer plugin dialog text which takes the kind of the required
+   GStreamer structures into account (e.g. ".. to play media files ...")
+
+ * Use app-install-data and apt-xapian-index to show applications instead of
+   packages in the confirmation dialog
+ 
+ * Show a warning icon and set a tooltip for possibly restriceted packages
+   in the confirmation dialog
+
+ * Show additional details in the confirmation dialog (e.g. which GStreamer
+   plugins are provided by the package)
+
+ * Several bug fixes
+
+
+VERSION 0.10
+
+The inital release of session-installer. See the README for more details.

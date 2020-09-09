@@ -1,0 +1,41 @@
+.\" groff -man -Tascii foo.1
+.TH SESSIONINSTALLER 1 "December 2009" Linux "User manual"
+.SH NAME
+session-installer \- allows applications to easily install and remove software
+.SH SYNOPSIS
+.B session-installer
+.SH DESCRIPTION
+.B Session-installer
+allows applications to easily install additional software (e.g. extensions or
+GSreamer codecs), uninstall files and perform simple package status queries by 
+calling a distribution neutral D-Bus interface.
+
+The whole process of confirmation, error reporting and progress notification 
+is handled by sessioninstaller. Currently it comes only with a GTK based user 
+interface.
+
+The D-Bus interface is developed under the PackageKit umbrella and is available
+on the session bus. The reference implementation can be found in 
+gnome-packagekit. It was also adopted by KPackageKit.
+
+In contrast to gnome-packagekit and KPackageKit it doesn't use the PackageKit 
+daemon for querying and installation, but instead makes use of APT and 
+aptdaemon directly (alternatively synaptic can be used).
+
+Normally it is not required to start this programme manually since it makes
+use of D-Bus activation and will be started on request automatically.
+.SH ENVIRONMENT
+.IP SESSIONINSTALLER_BACKEND
+Set the package manager which should be used for installation.
+Possible values are 
+.IR aptdaemon ", " synaptic " and " dummy .
+.SH HOMEPAGE
+https://launchpad.net/sessioninstaller
+.SH BUGS
+You can report bugs at the Launchpad site of aptdaemon:
+https://bugs.launchpad.net/sessioninstaller/+filebug
+.SH AUTHOR
+Sebastian Heinlein <devel at glatzor dot de>
+.SH SEE ALSO
+.BR aptd(1)
+.B http://www.packagekit.org/pk-faq.html#session-methods

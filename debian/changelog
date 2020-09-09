@@ -1,0 +1,285 @@
+sessioninstaller (0.20+pop0) focal; urgency=medium
+
+  * Maintain on git
+
+ -- Jeremy Soller <jeremy@system76.com>  Wed, 09 Sep 2020 09:47:48 -0600
+
+sessioninstaller (0.20+bzr150-0ubuntu4.1pop0) eoan; urgency=medium
+
+  * Upload to eoan
+
+ -- Jeremy Soller <jeremy@system76.com>  Tue, 15 Oct 2019 09:16:54 -0600
+
+sessioninstaller (0.20+bzr150-0ubuntu4.1) xenial; urgency=medium
+
+  * debian/patches/typofix.patch: typo fix in manpage and README
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Wed, 16 Mar 2016 16:37:22 +0100
+
+sessioninstaller (0.20+bzr150-0ubuntu4) xenial; urgency=medium
+
+  * debian/control:
+    - depends on python3-xdg (lp: #1556705) 
+    - depends on app-install-data (lp: #1497948)
+    - "adpoted" typo fix (lp: #1273548)
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Wed, 16 Mar 2016 16:03:48 +0100
+
+sessioninstaller (0.20+bzr150-0ubuntu3) xenial; urgency=medium
+
+  * apt-xapian-index terms are bytes - pass bytes to startsWith() when looking
+    at them.
+
+ -- Iain Lane <iain@orangesquash.org.uk>  Thu, 21 Jan 2016 12:42:14 +0000
+
+sessioninstaller (0.20+bzr150-0ubuntu2) wily; urgency=medium
+
+  * New gstreamer codec install API passes the parameters --interaction
+    --desktop-id and -startup-notification-id to us. We don't support them
+    (yet), and should not error out but should ignore them instead. They are
+    part of a new PackageKit API which is yet to be implmented but GStreamer
+    calls us manually. (LP: #1499889)
+
+ -- Iain Lane <iain@orangesquash.org.uk>  Mon, 28 Sep 2015 13:48:15 +0100
+
+sessioninstaller (0.20+bzr150-0ubuntu1) wily; urgency=medium
+
+  * Adjust Vcs-* for wily branch.
+  * New upstream snapshot:
+    - Port to Python 3 (LP: #1440368)
+    - Drop 03_new_gstreamer.patch, included upstream.
+  * debian/control: Move dependencies to Python 3.
+
+ -- Martin Pitt <martin.pitt@ubuntu.com>  Sun, 09 Aug 2015 12:50:08 +0200
+
+sessioninstaller (0.20+bzr141-0ubuntu4) trusty; urgency=medium
+
+  * debian/patches/03_new_gstreamer.patch:
+    - update to work with the current gstreamer version (lp: #1278284)
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Fri, 28 Mar 2014 17:01:02 +0100
+
+sessioninstaller (0.20+bzr141-0ubuntu3) trusty; urgency=medium
+
+  * Rebuild to drop files installed into /usr/share/pyshared.
+
+ -- Matthias Klose <doko@ubuntu.com>  Sun, 23 Feb 2014 13:53:59 +0000
+
+sessioninstaller (0.20+bzr141-0ubuntu2) saucy; urgency=low
+
+  * Depend on python-commandnotfound for InstallProvideFiles. (LP: #1060507) 
+
+ -- Iain Lane <iain@orangesquash.org.uk>  Wed, 09 Oct 2013 12:52:03 +0100
+
+sessioninstaller (0.20+bzr141-0ubuntu1) saucy; urgency=low
+
+  * Update Vcs-* headers for saucy branch.
+  * New upstream snapshot:
+    - Includes 03_gstreamer_1.0.patch, 04_dont_double_defer.patch,
+      05_parent_process_name.patch, drop these.
+    - Don't crash on parsing broken .desktop files. (LP: #1190097)
+
+ -- Martin Pitt <martin.pitt@ubuntu.com>  Thu, 13 Jun 2013 12:50:45 +0200
+
+sessioninstaller (0.20+bzr134-0ubuntu6) raring; urgency=low
+
+  * debian/patches/05_parent_process_name.patch:
+    - Cherry pick upstream patch to fix the detection of the client application.
+      Patch from Sebastian Heinlein, thanks! (LP: #1049467)
+
+ -- POJAR GEORGE <geoubuntu@gmail.com>  Mon, 08 Apr 2013 08:45:12 +0000
+
+sessioninstaller (0.20+bzr134-0ubuntu5) raring; urgency=low
+
+  * debian/patches/04_dont_double_defer.patch:
+    - Cherry pick upstream patch to avoid calling errback twice on the
+      same deferred object (LP: #1056545)
+
+ -- Michael Terry <mterry@ubuntu.com>  Thu, 28 Mar 2013 14:25:57 -0400
+
+sessioninstaller (0.20+bzr134-0ubuntu4) raring; urgency=low
+
+  [ Michael Vogt ]
+  * fix Bzr-Vcs header
+
+  [ Iain Lane ]
+  * Cherry-pick upstream patch to learn about gstreamer 1.0 and use g-i
+    GStreamer bindings instead of static python ones.
+  * Drop Depends on python-gst0.10 and add one on the gstreamer-1.0 gir
+    package instead. 
+
+ -- Iain Lane <iain.lane@canonical.com>  Wed, 13 Feb 2013 10:11:13 +0000
+
+sessioninstaller (0.20+bzr134-0ubuntu3) raring; urgency=low
+
+  [ Benjamin Kerensa ]
+  * Fix typo in core.py (LP: 988775)
+  
+  [ Michael Vogt ]
+  * new bzr version
+  * drop 03_synchronous_transactions.patch (in trunk now)
+
+ -- Michael Vogt <michael.vogt@ubuntu.com>  Mon, 05 Nov 2012 12:42:35 +0100
+
+sessioninstaller (0.20+bzr131-0ubuntu2) quantal; urgency=low
+
+  * Cherry-pick upstream revision 132 to make transactions synchronous, as is
+    expected (LP: #1042231)
+
+ -- Iain Lane <iain.lane@canonical.com>  Thu, 20 Sep 2012 16:13:18 +0100
+
+sessioninstaller (0.20+bzr131-0ubuntu1) quantal; urgency=low
+
+  * debian/control: Update Vcs-* to Quantal branch.
+  * New upstream snapshot:
+    - Fix typo in error message. (LP: #790500)
+    - Make sure not to accidentally call defer.callback() twice (LP #848605)
+    - Work around static vs. GI gobject binding crash. (LP: #1028640)
+  * Drop fix-defer-callback.patch, included upstream.
+
+ -- Martin Pitt <martin.pitt@ubuntu.com>  Tue, 21 Aug 2012 08:50:56 +0200
+
+sessioninstaller (0.20+bzr128-0ubuntu1.1) precise-proposed; urgency=low
+
+  * debian/patches/fix-defer-callback.patch:
+    - Make sure not to accidentally call defer.callback() twice
+      (LP: #848605)
+
+ -- Michael Terry <mterry@ubuntu.com>  Mon, 23 Jul 2012 16:18:37 -0400
+
+sessioninstaller (0.20+bzr128-0ubuntu1) precise-proposed; urgency=low
+
+  * New upstream release that fixes:
+    - merged lp:~aptdaemon-developers/sessioninstaller/multiarch
+      LP: #899001
+    - Fix missing translation for the restrcited packages tooltip 
+      LP: #972427
+    - Don't translate debugging messages LP: #792436
+    - Fix a string substition if the sender_name of InstallPackageNames
+      is unknown
+    - Check if packages are available at all and show a corresponding
+      error message if not (string addition) instead of a generic and
+      no descriptive message
+
+ -- Michael Vogt <michael.vogt@ubuntu.com>  Wed, 25 Apr 2012 15:04:59 +0200
+
+sessioninstaller (0.20+bzr123-0ubuntu2) precise; urgency=low
+
+  * debian/control: Fix dependencies: python-gobject → python-gi.
+
+ -- Martin Pitt <martin.pitt@ubuntu.com>  Tue, 13 Mar 2012 19:31:36 +0100
+
+sessioninstaller (0.20+bzr123-0ubuntu1) precise; urgency=low
+
+  * New upstream snapshot:
+    - Port to PyGI and GTK 3. (LP: #801202)
+  * debian/control: Move Vcs-Bzr: to precise branch.
+  * debian/control: C/R/P: gnome-codec-install, to clean this up on upgrades.
+    session-installer is the preferred UI now.
+  * debian/control: Update dependencies for PyGI/GTK 3 port.
+  * debian/control: Bump Standards-Version to 3.9.2 (no changes necessary).
+
+ -- Martin Pitt <martin.pitt@ubuntu.com>  Mon, 14 Nov 2011 15:26:01 +0100
+
+sessioninstaller (0.20+bzr120-0ubuntu2) oneiric; urgency=low
+
+  * Fixed two typos in debian/control (LP: #793396)
+
+ -- Alexander Fougner <fougner89@gmail.com>  Fri, 24 Jun 2011 12:42:19 +0200
+
+sessioninstaller (0.20+bzr120-0ubuntu1) oneiric; urgency=low
+
+  * new bzr snapshot
+  * updated from python-support to dh_python2
+
+ -- Michael Vogt <michael.vogt@ubuntu.com>  Fri, 10 Jun 2011 12:53:49 +0200
+
+sessioninstaller (0.20+bzr119-0ubuntu2) natty; urgency=low
+
+  * debian/patches/02_no_crash_on_install_provides.patch:
+    - do not raise a exception in _install_provide_files()
+      LP: #762431
+
+ -- Michael Vogt <michael.vogt@ubuntu.com>  Mon, 18 Apr 2011 11:51:08 +0200
+
+sessioninstaller (0.20+bzr119-0ubuntu1) natty; urgency=low
+
+  * new bzr bugfix snaphot:
+    - migrate backend to defer
+    - fix crash in _render_warning (LP: #713984)
+  * debian/patches/02_backends_defer.patch:
+    - dropped, part of upstream now
+
+ -- Michael Vogt <michael.vogt@ubuntu.com>  Thu, 31 Mar 2011 18:08:42 +0200
+
+sessioninstaller (0.20+bzr117-0ubuntu1) natty; urgency=low
+
+  * New bzr version:
+   - Migrate from aptdaemon.defer to defer. (LP: #703330)
+  * debian/patches/02_backends_defer.patch:
+   - Migrate also backends to defer.
+  * debian/control:
+   - Depends on python-defer.
+   - Depends on python-xapian.
+
+ -- Julien Lavergne <gilir@ubuntu.com>  Fri, 14 Jan 2011 22:39:37 +0100
+
+sessioninstaller (0.20+bzr115-0ubuntu1) maverick; urgency=low
+
+  * New bzr version that use the command-not-found database to
+    find files asked for by the InstallProviding interface. This
+    helps e.g. brasero to find the cdrdao package when it needs it
+    (LP: #630877)
+
+ -- Michael Vogt <michael.vogt@ubuntu.com>  Fri, 24 Sep 2010 10:50:55 +0200
+
+sessioninstaller (0.20+bzr112-0ubuntu1) maverick; urgency=low
+
+  * debian/patches/01_disable_install_print_drivers.patch: 
+    - silently exit on "InstallPrinterDrivers" (this is not
+      implmented yet) (LP: #633913)
+  * new bzr snapshot that fixes crash in InstallPrinterDrivers()
+    (LP: #612140)
+
+ -- Michael Vogt <michael.vogt@ubuntu.com>  Mon, 13 Sep 2010 16:02:53 +0200
+
+sessioninstaller (0.20-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control: Set Standards-Version to 3.9.0
+
+ -- Julian Andres Klode <jak@debian.org>  Mon, 12 Jul 2010 14:03:40 +0200
+
+sessioninstaller (0.10+bzr104-1) unstable; urgency=low
+
+  * Initial Upload to Debian (Closes: #558797)
+    - Change maintainer and VCS fields accordingly.
+  * Use python-support instead of python-central.
+  * Really use 3.0 (quilt) source format.
+  * debian/control: Use Vcs-* headers instead of XS-Vcs-* ones.
+  * debian/watch: Add watch file.
+
+ -- Julian Andres Klode <jak@debian.org>  Sun, 06 Jun 2010 14:59:03 +0200
+
+sessioninstaller (0.10+bzr104-0ubuntu1) maverick; urgency=low
+
+  * new bzr snapshot:
+    - support mime-type install
+    - support icons/applications
+
+ -- Michael Vogt <michael.vogt@ubuntu.com>  Thu, 27 May 2010 10:03:53 +0200
+
+sessioninstaller (0.10-0ubuntu2) maverick; urgency=low
+
+  * debian/copyright:
+    Use machine readable format
+  * debian/source/format:
+    Use 3.0 (quilt)
+
+ -- Sebastian Heinlein <devel@glatzor.de>  Sun, 16 May 2010 16:21:00 +0200
+
+sessioninstaller (0.10-0ubuntu1~ppa1) lucid; urgency=low
+
+  * Initial Release.
+
+ -- Sebastian Heinlein <glatzor@ubuntu.com>  Fri, 05 Dec 2008 14:29:13 -0800
