@@ -42,6 +42,9 @@ import dbus.service
 import dbus.mainloop.glib
 from gettext import gettext as _
 import gettext
+import gi
+gi.require_version('Gst', '1.0')
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gio
 from gi.repository import GObject
 from gi.repository import Gst
