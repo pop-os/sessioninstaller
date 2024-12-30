@@ -45,7 +45,7 @@ from _errors import *
 
 def convert_dbus_exception(func):
     """A decorator which maps a raised DBbus exception to a native one."""
-    argnames, varargs, kwargs, defaults = inspect.getargspec(func)
+    argnames, varargs, kwargs, defaults, kwonlyargs, kwonlydefaults, annotations = inspect.getfullargspec(func)
     @wraps(func)
     def _convert_dbus_exception(*args, **kwargs):
         try:
