@@ -468,7 +468,7 @@ class SessionInstaller(dbus.service.Object):
         except:
             return_value(None)
         # Try to get the name of an interpreted script
-        if re.match("(/usr/bin/python([0-9]\.[0-9])?)|(/usr/bin/perl)", exe):
+        if re.match(r"(/usr/bin/python([0-9]\.[0-9])?)|(/usr/bin/perl)", exe):
             try:
                 exe = utils.get_process_cmdline(pid)[1]
             except (IndexError, OSError):
@@ -565,9 +565,9 @@ class SessionInstaller(dbus.service.Object):
         self._init_cache()
         # Search for installed files
         if file_name.startswith("/"):
-            pattern = "^%s$" % file_name.replace("/", "\/")
+            pattern = "^%s$" % file_name.replace("/", r"\/")
         else:
-            pattern = ".*\/%s$" % file_name
+            pattern = r".*\/%s$" % file_name
         re_file = re.compile(pattern)
         for pkg in self._cache:
             # FIXME: Fix python-apt
@@ -588,9 +588,9 @@ class SessionInstaller(dbus.service.Object):
             #       weeks old
             log.debug("Using apt-file")
             if file_name.startswith("/"):
-                pattern = "^%s$" % file_name[1:].replace("/", "\/")
+                pattern = "^%s$" % file_name[1:].replace("/", r"\/")
             else:
-                pattern = "\/%s$" % file_name
+                pattern = r"\/%s$" % file_name
             cmd = ["/usr/bin/apt-file", "--regexp", "--non-interactive",
                    "--package-only", "find", pattern]
             log.debug("Calling: %s" % cmd)
@@ -757,7 +757,7 @@ class SessionInstaller(dbus.service.Object):
         distro, code, release = os.popen("/usr/bin/lsb_release "
                                          "--id --code --release "
                                          "--short").read().split()
-        regex = "^(?P<action>[a-z]+)(\(%s(;((%s)|(%s))(;%s)?)?\))?$" % \
+        regex = r"^(?P<action>[a-z]+)(\(%s(;((%s)|(%s))(;%s)?)?\))?$" % \
                 (distro, code, release, arch)
         re_action = re.compile(regex, flags=re.IGNORECASE)
         pkgs = set()
@@ -1165,9 +1165,9 @@ class SessionInstaller(dbus.service.Object):
     def _install_gstreamer_resources(self, xid, resources, interaction, sender):
         def parse_gstreamer_structure(resource):
             # E.g. "MS Video|gstreamer0.10(decoder-video/x-wmv)(wmvversion=3)"
-            match = re.match("^(?P<name>.*)\|gstreamer(?P<version>[0-9\.]+)"
-                             "\((?P<kind>.+?)-(?P<structname>.+?)\)"
-                             "(?P<fields>\(.+\))?$", resource)
+            match = re.match(r"^(?P<name>.*)\|gstreamer(?P<version>[0-9\.]+)"
+                             r"\((?P<kind>.+?)-(?P<structname>.+?)\)"
+                             r"(?P<fields>\(.+\))?$", resource)
             caps = None
             element = None
             if not match:
@@ -1179,7 +1179,7 @@ class SessionInstaller(dbus.service.Object):
             if match.group("kind") in ["encoder", "decoder"]:
                 caps_str = "%s" % match.group("structname")
                 if match.group("fields"):
-                    for field in re.findall("\((.+?=(\(.+?\))?.+?)\)",
+                    for field in re.findall(r"\((.+?=(\(.+?\))?.+?)\)",
                                             match.group("fields")):
                         caps_str += ", %s" % field[0]
                 # gst.Caps.__init__ cannot handle unicode instances
