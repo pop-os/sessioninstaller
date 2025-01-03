@@ -56,9 +56,9 @@ class GStreamerInstaller(object):
         # See http://gstreamer.freedesktop.org/data/doc/gstreamer/head/
         #             gst-plugins-base-libs/html/
         #             gst-plugins-base-libs-gstpbutilsinstallplugins.html
-        regex = re.compile("^gstreamer\|(?P<major>[0-9])+\.(?P<minor>[0-9]+)\|"
-                           "(?P<app>.+)\|(?P<desc>.+)\|(?P<type>[a-z]+?)-"
-                           "(?P<name>.+?)(,(?P<fields>.+))?[|]?$")
+        regex = re.compile(r"^gstreamer\|(?P<major>[0-9])+\.(?P<minor>[0-9]+)\|"
+                           r"(?P<app>.+)\|(?P<desc>.+)\|(?P<type>[a-z]+?)-"
+                           r"(?P<name>.+?)(,(?P<fields>.+))?[|]?$")
         for codec in codecs:
             match = regex.match(codec)
             if not match:
